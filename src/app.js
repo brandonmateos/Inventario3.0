@@ -6,44 +6,34 @@ const inventario = new Inventario();
 
 
 function mostrarProductos() {
-    inventario.ordenarLista();
     document.getElementById("product-list").innerHTML = "";
     let lista = inventario.devolverLista();
-    for (let i = 0; i < lista.length; i++) {
+
+    let temp = lista;
+    while (temp != null) {
         const listaProducto = document.getElementById('product-list');
         const element = document.createElement('div');
         element.innerHTML = `
         <div class="card text-center mb-4">
             <div class="card-body">
-                <strong>Codigo</strong>: ${lista[i].codigo}
-                <strong>Nombre</strong>: ${lista[i].nombre}
-                <strong>Precio</strong>: ${lista[i].precio}
-                <strong>Cantidad</strong>: ${lista[i].cantidad}
+                <strong>Codigo</strong>: ${temp.codigo}
+                <strong>Nombre</strong>: ${temp.nombre}
+                <strong>Precio</strong>: ${temp.precio}
+                <strong>Cantidad</strong>: ${temp.cantidad}
             </div>
         </div>
         `;
         listaProducto.appendChild(element);
+        temp = temp.next;
     }
+    
+
+
+
 }
 
 function listarInvertido() {
-    document.getElementById("product-list").innerHTML = "";
-    let lista = inventario.devolverLista();
-    for (let i = lista.length - 1; i >= 0; i--) {
-        const listaProducto = document.getElementById('product-list');
-        const element = document.createElement('div');
-        element.innerHTML = `
-        <div class="card text-center mb-4">
-            <div class="card-body">
-                <strong>Codigo</strong>: ${lista[i].codigo}
-                <strong>Nombre</strong>: ${lista[i].nombre}
-                <strong>Precio</strong>: ${lista[i].precio}
-                <strong>Cantidad</strong>: ${lista[i].cantidad}
-            </div>
-        </div>
-        `;
-        listaProducto.appendChild(element);
-    }
+    
 }
 
 function buscarUnProducto(codigo) {
@@ -93,15 +83,7 @@ function eliminarProducto(codigo) {
         element.innerHTML = `
         <div class="card text-center mb-4">
             <div class="card-body">
-                <strong>Eliminaste el Producto:</strong>
-            </div>
-        </div>
-        <div class="card text-center mb-4">
-            <div class="card-body">
-                <strong>Codigo</strong>: ${eliminar.codigo}
-                <strong>Nombre</strong>: ${eliminar.nombre}
-                <strong>Precio</strong>: ${eliminar.precio}
-                <strong>Cantidad</strong>: ${eliminar.cantidad}
+                <strong>Producto Eliminado</strong>
             </div>
         </div>
         `;
@@ -118,14 +100,14 @@ document.getElementById('producto-form')
         const cantidad = document.getElementById('cantidad').value;
 
         const producto = new Producto(codigo, nombre, precio, cantidad);
-
-        document.getElementById("product-list").innerHTML = "";
+        
         const listaProducto = document.getElementById('product-list');
         const element = document.createElement('div');
-        if (inventario.buscarProducto(codigo) === false) {
-            inventario.addProducto(producto);
+
+       // if (inventario.buscarProducto(codigo) === false) {
+            inventario.agregarProducto(producto);
             mostrarProductos();
-        } else {
+        /*} else {
             element.innerHTML = `
                 <div class="card text-center mb-4">
                     <div class="card-body">
@@ -134,7 +116,7 @@ document.getElementById('producto-form')
                 </div>
                 `;
             listaProducto.appendChild(element)
-        }
+        }*/
 
         e.preventDefault();
     });
