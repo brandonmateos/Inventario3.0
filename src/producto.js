@@ -6,4 +6,5 @@ export class Producto {
         this.cantidad = cantidad;
         this.next = null;
     }
+    
 }

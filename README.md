@@ -16,4 +16,4 @@ Es decir, los métodos de Inventario deben permitir:
     - Insertar
     - Listar
     - Listar Inverso 
-Recordar que se deben usar por lo menos las clases del Producto, la del Inventario y la de la Aplicación (interacción con el DOM HTML)
+Recordar que se deben usar por lo menos las clases del Producto, la del Inventario y la de la Aplicación (interacción con el DOM HTML).

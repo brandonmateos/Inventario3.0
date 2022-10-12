@@ -28,8 +28,6 @@ function mostrarProductos() {
     }
     
 
-
-
 }
 
 function listarInvertido() {
