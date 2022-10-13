@@ -26,13 +26,39 @@ function mostrarProductos() {
         listaProducto.appendChild(element);
         temp = temp.next;
     }
-    
+
 
 }
 
 function listarInvertido() {
-    
+    document.getElementById("product-list").innerHTML = "";
+    let lista = inventario.devolverLista();
+
+    let temp = lista;
+    let str = "";
+    while (temp != null) {
+        str = `
+        <div class="card text-center mb-4">
+            <div class="card-body">
+                <strong>Codigo</strong>: ${temp.codigo}
+                <strong>Nombre</strong>: ${temp.nombre}
+                <strong>Precio</strong>: ${temp.precio}
+                <strong>Cantidad</strong>: ${temp.cantidad}
+            </div>
+        </div>
+
+        `+ str;
+
+        temp = temp.next;
+    }
+    const listaProducto = document.getElementById('product-list');
+    const element = document.createElement('div');
+    element.innerHTML = str;
+    listaProducto.appendChild(element);
 }
+
+
+
 
 function buscarUnProducto(codigo) {
     let buscar = inventario.buscarProducto(codigo);
@@ -98,13 +124,13 @@ document.getElementById('producto-form')
         const cantidad = document.getElementById('cantidad').value;
 
         const producto = new Producto(codigo, nombre, precio, cantidad);
-        
+
         const listaProducto = document.getElementById('product-list');
         const element = document.createElement('div');
 
-       // if (inventario.buscarProducto(codigo) === false) {
-            inventario.agregarProducto(producto);
-            mostrarProductos();
+        // if (inventario.buscarProducto(codigo) === false) {
+        inventario.agregarProducto(producto);
+        mostrarProductos();
         /*} else {
             element.innerHTML = `
                 <div class="card text-center mb-4">
@@ -144,5 +170,21 @@ document.getElementById('producto-Mostrar')
 document.getElementById('producto-invertir')
     .addEventListener('submit', function (e) {
         listarInvertido();
+        e.preventDefault();
+    });
+
+document.getElementById('producto-insertar')
+    .addEventListener('submit', function (e) {
+        const codigo = document.getElementById('codigoInsertar').value;
+        const nombre = document.getElementById('nombreInsertar').value;
+        const precio = document.getElementById('precioInsertar').value;
+        const cantidad = document.getElementById('cantidadInsertar').value;
+        const posicion = document.getElementById('posicionInsertar').value;
+
+        const producto = new Producto(codigo, nombre, precio, cantidad);
+
+        inventario.insertarProducto(producto, posicion);
+        mostrarProductos();
+
         e.preventDefault();
     });
