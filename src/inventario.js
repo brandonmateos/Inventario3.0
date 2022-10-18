@@ -7,7 +7,7 @@ export class Inventario {
             this.lista = producto;
         } else {
             let temp = this.lista;
-            while (temp.next != null){
+            while (temp.next != null) {
                 temp = temp.next;
             }
             temp.next = producto;
@@ -35,7 +35,7 @@ export class Inventario {
                 }
                 return false;
             }
-        }       
+        }
 
     }
 
@@ -52,26 +52,33 @@ export class Inventario {
             }
             return false;
         }
-        
+
     }
 
-    insertarProducto(producto, codigo) {
+    insertarProducto(producto, posicion) {
         if (this.lista == null) {
             return "No hay productos en el inventario";
         } else {
-            let temp = this.lista;
-            while (temp != null) {
-                if (temp.codigo == codigo) {
-                    producto.next = temp.next;
-                    temp.next = producto;
-                    return "Producto insertado";
+            if (posicion == 1) {
+                if(this.lista == null){
+                    this.lista = producto;
+                }else{
+                    producto.next = this.lista;
+                    this.lista = producto;
                 }
-                temp = temp.next;
+            } else {
+                let temp = this.lista;
+                for (let i = 0; i < posicion - 2; i++) {
+                    temp = temp.next;
+                }
+                producto.next = temp.next;
+                temp.next = producto;
             }
+
             return "Producto no encontrado";
         }
-        
+
     }
-    
+
 
 }

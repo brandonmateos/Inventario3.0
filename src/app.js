@@ -128,19 +128,20 @@ document.getElementById('producto-form')
         const listaProducto = document.getElementById('product-list');
         const element = document.createElement('div');
 
-        // if (inventario.buscarProducto(codigo) === false) {
+        let buscar = inventario.buscarProducto(codigo);
+        if (buscar === "No hay productos en el inventario" || buscar === false) {
         inventario.agregarProducto(producto);
         mostrarProductos();
-        /*} else {
+        } else {
             element.innerHTML = `
                 <div class="card text-center mb-4">
                     <div class="card-body">
-                        <strong>El Producto Ya Existe</strong>
+                        <strong>El Producto Ya Existe </strong>
                     </div>
                 </div>
                 `;
             listaProducto.appendChild(element)
-        }*/
+        }
 
         e.preventDefault();
     });
